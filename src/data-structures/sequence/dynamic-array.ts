@@ -1,6 +1,7 @@
 class DynamicArray<T> {
+	private capacity: number;
+
 	array: (T|undefined)[];
-	capacity: number;
 	fill: number;
 
 	private addSpace() {

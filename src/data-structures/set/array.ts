@@ -1,4 +1,4 @@
-class SetArray<T extends { key: F }, F> {
+export class SetArray<T extends { key: F }, F> {
   elements: T[];
   size = 0;
 
@@ -112,6 +112,7 @@ class SetArray<T extends { key: F }, F> {
   }
 }
 
+/*
 interface Item {
   item: number;
   key: number;
@@ -134,5 +135,4 @@ console.log("PREV 6: ", arr.findPrev(6))
 
 arr.delete(23);
 console.log(arr);
-
-export {}
+*/
