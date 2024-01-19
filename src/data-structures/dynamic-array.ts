@@ -35,14 +35,15 @@ class DynamicArray {
     return this.size;
   }
 
-	public getCapacity() {
-		return this.capacity;
-	}
+  public getCapacity() {
+    return this.capacity;
+  }
 
   public toString() {
     return String(this.array.slice(0, this.size));
   }
 
+  // O(n)
   public insertAt(index: number, value: number) {
     if (index < 0 || index > this.size)
       throw new Error("Index must be in bounds!");
@@ -62,14 +63,17 @@ class DynamicArray {
     if (this.size === this.capacity) this.grow();
   }
 
+  // O(n)
   public insertAtBeginning(value: number) {
     this.insertAt(0, value);
   }
 
+  // O(n)
   public insertAtEnd(value: number) {
     this.insertAt(this.size, value);
   }
 
+  // O(n)
   public deleteAt(index: number) {
     if (index < 0 || index >= this.size)
       throw new Error("Index must be in bounds!");
@@ -84,14 +88,17 @@ class DynamicArray {
     if (this.size <= Math.floor(this.capacity / 4)) this.shrink();
   }
 
+  // O(n)
   public deleteFromBeginning() {
     this.deleteAt(0);
   }
 
+  // O(n)
   public deleteFromEnd() {
     this.deleteAt(this.size - 1);
   }
 
+  // O(n)
   public find(value: number) {
     for (let i = 0; i < this.size; i++) {
       if (this.array[i] === value) return i;
@@ -99,9 +106,17 @@ class DynamicArray {
 
     return -1;
   }
+
+  // O(1)
+  public get(index: number) {
+    if (index < 0 || index >= this.size)
+      throw new Error("Index must be in bounds!");
+
+    return this.array[index];
+  }
 }
 
-const dynamicArray = new DynamicArray([77,64,43,23,56]);
+const dynamicArray = new DynamicArray([77, 64, 43, 23, 56]);
 dynamicArray.insertAtBeginning(4);
 dynamicArray.insertAtBeginning(2);
 dynamicArray.insertAtBeginning(1);

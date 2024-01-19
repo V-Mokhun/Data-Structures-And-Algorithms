@@ -10,17 +10,20 @@ class Stack {
 		}
 	}
 
+	// O(1)
   public push(value: number) {
     this.stack.push(value);
     this.size++;
   }
 
+	// O(1)
   public pop() {
     if (this.isEmpty()) throw new Error("Stack is Empty!");
     this.size--;
     return this.stack.pop();
   }
 
+	// O(1)
   public peek() {
     if (this.isEmpty()) return undefined;
 

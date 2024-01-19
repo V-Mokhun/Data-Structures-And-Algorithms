@@ -10,7 +10,7 @@ class Node {
 
 // Implementation without tail, with tail I'd also add addToEnd, deleteFromEnd and it would take O(1) time
 
-class LinkedList {
+export class LinkedList {
   private size: number;
   private head: Node | null;
 
@@ -96,7 +96,7 @@ class LinkedList {
   }
 
   // O(1)
-  deleteAtBeginning() {
+  deleteFromBeginning() {
     if (this.head === null) throw new Error("List is empty!");
     this.head = this.head.next;
     this.size--;
@@ -156,4 +156,4 @@ console.log(linkedList.toString());
 linkedList.add(10);
 linkedList.remove(4);
 console.log(linkedList.toString());
-console.log(linkedList.getSize())
+console.log(linkedList.getSize());
