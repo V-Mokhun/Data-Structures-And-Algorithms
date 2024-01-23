@@ -21,7 +21,7 @@ class BinarySearchTree<T> {
     const node = this.find(value);
     if (!node) return null;
 
-    if (node.right) return this.getMin(node);
+    if (node.right) return this.getMin(node.right);
 
     let temp = this.root;
     let succ = null;
@@ -52,7 +52,7 @@ class BinarySearchTree<T> {
   findParent(value: T) {
     let temp = this.root;
 
-    if (!this.root) return null;
+    if (!this.root || this.root.value === value) return null;
 
     while (temp !== null) {
       if (temp.left?.value === value || temp.right?.value === value)
@@ -65,11 +65,11 @@ class BinarySearchTree<T> {
   }
 
   traverse(root = this.root, output = "") {
-    if (!root) return;
+    if (!root) return output;
 
-    this.traverse(root.left);
+    output += this.traverse(root.left);
     output += `${root.value} -> `;
-    this.traverse(root.right);
+    output += this.traverse(root.right);
 
     return output;
   }
@@ -93,52 +93,35 @@ class BinarySearchTree<T> {
   }
 
   remove(value: T) {
-    const node = this.find(value);
-    if (!node) return false;
-
-    const hasNoChildren = node.left === null && node.right === null;
-    const hasLeftChild = node.left !== null && node.right === null;
-    const hasRightChild = node.left === null && node.right !== null;
-    const hasOneChild = hasLeftChild || hasRightChild;
-
-    const parent = this.findParent(value);
-    if (hasNoChildren) {
-      if (!parent) {
-        this.root = null;
-        this.size--;
-        return true;
+    const removeNode = (node: Node<T> | null, key: T): Node<T> | null => {
+      if (node === null) {
+        return null;
       }
 
-      if (parent.left?.value === value) parent.left = null;
-      else parent.right = null;
-      this.size--;
-    } else if (hasOneChild) {
-      if (!parent) {
-        this.root = node.right === null ? node.left : node.right;
-        this.size--;
-        return true;
-      }
-
-      if (parent.left?.value === value) {
-        if (hasLeftChild) parent.left = node.left;
-        else parent.left = node.right;
+      if (key < node.value) {
+        node.left = removeNode(node.left, key);
+      } else if (key > node.value) {
+        node.right = removeNode(node.right, key);
       } else {
-        if (hasLeftChild) parent.right = node.left;
-        else parent.right = node.right;
+        // Node with only one child or no child
+        if (node.left === null) {
+          return node.right;
+        } else if (node.right === null) {
+          return node.left;
+        }
+
+        // Node with two children, get the inorder successor
+        const succ = this.getMin(node.right);
+        if (!succ) return node;
+
+        node.value = succ.value;
+        node.right = removeNode(node.right, node.value);
       }
 
-      this.size--;
-    } else {
-      const successor = this.successor(value);
-      if (!successor) return false;
+      return node;
+    };
 
-      let temp = successor.value;
-      successor.value = node.value;
-      node.value = temp;
-
-      this.remove(successor.value);
-    }
-
+    this.root = removeNode(this.root, value);
     return true;
   }
 
@@ -166,3 +149,17 @@ class BinarySearchTree<T> {
     return this.size;
   }
 }
+
+const bst = new BinarySearchTree();
+bst.insert(4);
+bst.insert(9);
+bst.insert(2);
+bst.insert(1);
+bst.insert(7);
+// console.log(bst.traverse());
+// console.log(bst.findParent(5));
+// console.log(bst.getMax())
+// console.log(bst.successor(2))
+
+bst.remove(4);
+console.log(bst.traverse());
