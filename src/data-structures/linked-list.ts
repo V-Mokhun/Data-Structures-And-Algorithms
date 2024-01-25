@@ -46,7 +46,7 @@ export class LinkedList {
 
   // O(n)
   find(item: number): Node | null {
-    if (!this.head) throw new Error("List is empty!");
+    if (!this.head) return null;
 
     let temp: Node | null = this.head;
     while (temp != null && temp.item !== item) {
@@ -147,13 +147,13 @@ export class LinkedList {
   }
 }
 
-const linkedList = new LinkedList();
-linkedList.add(4);
-linkedList.insertAfter(4, new Node(9));
-linkedList.insertBefore(9, new Node(2));
-linkedList.insertBefore(4, new Node(3));
-console.log(linkedList.toString());
-linkedList.add(10);
-linkedList.remove(4);
-console.log(linkedList.toString());
-console.log(linkedList.getSize());
+// const linkedList = new LinkedList();
+// linkedList.add(4);
+// linkedList.insertAfter(4, new Node(9));
+// linkedList.insertBefore(9, new Node(2));
+// linkedList.insertBefore(4, new Node(3));
+// console.log(linkedList.toString());
+// linkedList.add(10);
+// linkedList.remove(4);
+// console.log(linkedList.toString());
+// console.log(linkedList.getSize());

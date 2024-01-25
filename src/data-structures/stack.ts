@@ -1,4 +1,4 @@
-class Stack {
+export class Stack {
   private size = 0;
   private stack: number[] = [];
 
@@ -39,13 +39,13 @@ class Stack {
   }
 }
 
-const stack = new Stack([4,7,9])
-console.log(stack.peek())
-stack.pop()
-stack.pop()
-stack.push(99);
-stack.pop()
-console.log(stack.peek())
-stack.pop()
-console.log(stack.isEmpty())
-console.log(stack.peek())
+// const stack = new Stack([4,7,9])
+// console.log(stack.peek())
+// stack.pop()
+// stack.pop()
+// stack.push(99);
+// stack.pop()
+// console.log(stack.peek())
+// stack.pop()
+// console.log(stack.isEmpty())
+// console.log(stack.peek())
